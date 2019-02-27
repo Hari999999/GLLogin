@@ -1,0 +1,61 @@
+<h4>GL SalesDashBoard Login </h4>
+<hr>
+<div class = "formgroup">
+    <div class="row">
+        <label for = "loginType">Login Type:</label>
+        <label class="form-check-inline"> <label>NSM</label>
+            <input class="form-check-input" type="radio" name="mode" value="NSM" (click) ="setUserType('NSM')"  [checked]='true' ngModel >
+        </label>
+
+        <label class="form-check-inline"><label>RSM</label>
+            <input class="form-check-input" type="radio" name="mode" value="RSM" (click) ="setUserType('RSM')" ngModel>
+        </label>
+       </div> 
+    </div>
+
+     
+<form  #f=ngForm (ngSubmit)="onSubmit()"> 
+    <div class="form-group">
+        <label for="username">Username</label>
+        <div class="row">
+          <div class="col-xs-3">
+        <input type="text" name="username"  class="form-control" 
+        #nameUser = "ngModel" [(ngModel)]="userName"
+        ngModel class="form-control"
+        pattern ="[a-zA-Z][a-zA-Z]+"
+        required />
+      </div>
+    </div>
+    </div>
+
+    <div class = "row">
+      <div class="col-xs-3">
+    <div *ngIf="nameUser?.touched">
+      <div  *ngIf= "nameUser?.errors?.required" class="alert alert-danger">Name is Required</div>
+
+      <div *ngIf="nameUser?.errors?.pattern" class= "alert alert-danger"> Name is Invalid</div>
+    </div>
+    </div>
+  </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <div class="row">
+        <div class="col-xs-3">
+        <input type="password" name="password"  class="form-control" [(ngModel)]="userPassword"
+        #password= "ngModel"
+        ngModel class="form-control"
+        required />
+      </div></div>
+    </div>
+    <div class = "row">
+        <div class="col-xs-3">
+    <div *ngIf="password?.touched">
+      <div  *ngIf= "password?.errors?.required" class="alert alert-danger">Password is Required</div>
+     </div>
+     </div>
+    </div>
+   <button type ="submit" class = "btn btn-success" [disabled]="f.invalid">Login</button>
+    
+   
+</form>
+
